@@ -1,5 +1,5 @@
-import { Diya, Lotus, OrnamentFrame } from "./Ornaments";
-import Reveal from "./Reveal";
+import { Diya, Lotus, OrnamentFrame } from "./components/Ornaments";
+import Reveal from "./components/Reveal";
 import type { InvitationContent } from "@/data/types";
 
 export default function WeddingFooter({
