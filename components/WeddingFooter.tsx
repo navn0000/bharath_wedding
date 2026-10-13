@@ -28,9 +28,6 @@ export default function WeddingFooter({
           {footer.family}
         </p>
         <p className="mt-1.5 text-cream/85">{footer.address}</p>
-        <p className="mt-6 text-lg font-semibold tracking-[0.18em] text-gold-300">
-          {footer.host}
-        </p>
       </Reveal>
     </footer>
   );

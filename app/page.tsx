@@ -1,11 +1,14 @@
+'use client';
 import Link from "next/link";
 import { OrnamentFrame, Lotus } from "@/components/Ornaments";
 
 /** Simple language chooser for anyone who opens the bare domain. */
 export default function Home() {
+
   return (
     <main className="relative isolate flex min-h-[100svh] items-center justify-center overflow-hidden bg-maroon-900 bg-kolam px-6 py-16 text-center text-cream">
       <OrnamentFrame />
+      
       <div className="relative flex w-full max-w-sm flex-col items-center">
         <Lotus className="h-10 w-16 text-gold-300" />
         <h1 className="hero-name mt-5 text-cream">

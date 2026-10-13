@@ -57,7 +57,7 @@ export const tamil: InvitationContent = {
     venueLabel: "இடம்",
     venueName: "CD பவுண்டேசன்",
     venueLines: ["போத்தனூர் – செட்டிபாளையம் சாலை", "கோயம்புத்தூர்"],
-    venueExtra: "B.R. Puram, Hope College",
+    // venueExtra: "B.R. Puram, Hope College",
     countdown: {
       heading: "வரவேற்பு விழாவிற்கு இன்னும்",
       ariaLabel: "திருமண வரவேற்பு விழாவிற்கு மீதமுள்ள நேரம்",

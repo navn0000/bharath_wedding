@@ -57,7 +57,7 @@ export const english: InvitationContent = {
     venueLabel: "Venue",
     venueName: "CD Foundation",
     venueLines: ["Pothanur–Chettipalayam Road", "Coimbatore"],
-    venueExtra: "B.R. Puram, Hope College",
+    // venueExtra: "B.R. Puram, Hope College",
     countdown: {
       heading: "Counting down to the reception",
       ariaLabel: "Time remaining until the wedding reception",

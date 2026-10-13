@@ -1,3 +1,4 @@
+'use client';
 import WeddingNavigation from "./WeddingNavigation";
 import WeddingHero from "./WeddingHero";
 import ReceptionSection from "./ReceptionSection";
@@ -7,6 +8,7 @@ import ThirukkuralSection from "./ThirukkuralSection";
 import WeddingFooter from "./WeddingFooter";
 import MusicToggle from "./MusicToggle";
 import type { InvitationContent } from "@/data/types";
+import WeddingEntry from "./WeddingEntry";
 
 /** One shared page layout; only the `content` differs between Tamil and English. */
 export default function InvitationPage({
@@ -14,6 +16,8 @@ export default function InvitationPage({
 }: {
   content: InvitationContent;
 }) {
+
+
   return (
     <div
       lang={content.lang}
@@ -36,6 +40,7 @@ export default function InvitationPage({
         <ThirukkuralSection content={content} />
       </main>
       <WeddingFooter content={content} />
+      {/* <WeddingEntry /> */}
       <MusicToggle
         playLabel={content.ui.music.play}
         pauseLabel={content.ui.music.pause}

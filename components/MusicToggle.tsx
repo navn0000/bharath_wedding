@@ -3,12 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Music, Pause } from "lucide-react";
 
-/**
- * Optional background music. Never autoplays: audio starts only after a tap.
- * Renders nothing unless NEXT_PUBLIC_MUSIC_SRC is set, so there is never a
- * broken audio source.
- */
-const MUSIC_SRC = process.env.NEXT_PUBLIC_MUSIC_SRC?.trim() ?? "";
+const MUSIC_SRC = "/music/wedding-song.mp3";
 
 export default function MusicToggle({
   playLabel,
@@ -21,27 +16,49 @@ export default function MusicToggle({
   const [playing, setPlaying] = useState(false);
 
   useEffect(() => {
+    const audio = new Audio(MUSIC_SRC);
+
+    audio.loop = true;
+    audio.preload = "auto";
+
+    audio.addEventListener("play", () => setPlaying(true));
+    audio.addEventListener("pause", () => setPlaying(false));
+    audio.addEventListener("ended", () => setPlaying(false));
+
+    audioRef.current = audio;
+
+    // Try to autoplay
+    audio
+      .play()
+      .then(() => {
+        setPlaying(true);
+      })
+      .catch(() => {
+        // Browser blocked autoplay.
+        // User can start it using the button.
+        setPlaying(false);
+      });
+
     return () => {
-      audioRef.current?.pause();
+      audio.pause();
+      audio.removeEventListener("play", () => setPlaying(true));
+      audio.removeEventListener("pause", () => setPlaying(false));
+      audio.removeEventListener("ended", () => setPlaying(false));
       audioRef.current = null;
     };
   }, []);
 
-  if (!MUSIC_SRC) return null;
-
   const toggle = async () => {
-    if (!audioRef.current) {
-      const audio = new Audio(MUSIC_SRC);
-      audio.loop = true;
-      audio.preload = "none";
-      audio.addEventListener("pause", () => setPlaying(false));
-      audio.addEventListener("play", () => setPlaying(true));
-      audioRef.current = audio;
-    }
     const audio = audioRef.current;
+
+    if (!audio) return;
+
     try {
-      if (audio.paused) await audio.play();
-      else audio.pause();
+      if (audio.paused) {
+        await audio.play();
+      } else {
+        audio.pause();
+      }
     } catch {
       setPlaying(false);
     }
@@ -53,7 +70,17 @@ export default function MusicToggle({
       onClick={toggle}
       aria-pressed={playing}
       aria-label={playing ? pauseLabel : playLabel}
-      className="fixed bottom-5 right-4 z-50 flex h-12 w-12 items-center justify-center rounded-full border border-gold-400 bg-maroon-800 text-gold-200 shadow-lg transition active:scale-95 hover:bg-maroon-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold-300 focus-visible:ring-offset-2 focus-visible:ring-offset-cream"
+      className="fixed bottom-5 right-4 z-50 flex h-12 w-12
+        items-center justify-center rounded-full
+        border border-gold-400 bg-white
+        text-gold-700
+        shadow-[0_6px_20px_rgba(150,113,51,0.18)]
+        transition active:scale-95
+        hover:bg-cream-100
+        focus-visible:outline-none
+        focus-visible:ring-2
+        focus-visible:ring-gold-300
+        focus-visible:ring-offset-2"
     >
       {playing ? (
         <Pause className="h-5 w-5" aria-hidden="true" />
